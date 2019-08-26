@@ -1,31 +1,113 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+    >
+      <v-list dense>
+        <v-list-item @click="">
+          <v-list-item-action>
+            <v-icon>dashboard</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>DashBoard</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="">
+          <v-list-item-action>
+            <v-icon>event</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Contacto</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="">
+          <v-list-item-action>
+            <v-icon>info</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Cuenta</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="">
+          <v-list-item-action>
+            <v-icon>settings</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Settings</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar
+      app
+      clipped-left
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Casa Andina Project</v-toolbar-title>
+    </v-app-bar>
+
+    <v-content>
+      <v-container
+        fluid
+        fill-height
+      >
+        <v-layout
+          align-center
+          justify-center
+        >
+          <v-flex shrink>
+            <v-tooltip right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  :href="source"
+                  icon
+                  large
+                  target="_blank"
+                  v-on="on"
+                >
+                  <v-icon large>mdi-code-tags</v-icon>
+                </v-btn>
+              </template>
+              <span>Source</span>
+            </v-tooltip>
+            <v-tooltip right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  large
+                  href=""
+                  target="_blank"
+                  v-on="on"
+                >
+                  <v-icon large>mdi-codepen</v-icon>
+                </v-btn>
+              </template>
+              <span>Codepen</span>
+            </v-tooltip>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+
+    <v-footer app>
+      <span>&copy; 2019</span>
+    </v-footer>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+  export default {
+    props: {
+      source: String,
+    },
+    data: () => ({
+      drawer: null,
+    }),
+    created () {
+      this.$vuetify.theme.dark = true
+    },
+  }
+</script>
